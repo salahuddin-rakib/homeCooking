@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  skip_before_action :authorize, only: [:create, :update]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -60,6 +61,11 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def redirect_to_show
+    @post = Post.find(params[:id])
+    redirect_to @post
   end
 
   private

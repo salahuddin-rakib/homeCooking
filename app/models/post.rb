@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  has_many :comments, dependent: :destroy
   validates :description, :image_url, presence: true
   validates :title, uniqueness: true
   validates :title, presence: true, length: {minimum: 5}
