@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
-
   resources :users
   root 'posts#index', as: 'home'
   resources :posts do
