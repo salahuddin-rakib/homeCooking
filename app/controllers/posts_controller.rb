@@ -11,19 +11,11 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   # GET /posts/new
   def new
     @post = Post.new
-    respond_to do |format|
-      format.js
-    end
   end
 
   # GET /posts/1/edit
@@ -69,6 +61,11 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def redirect_to_show
+    @post = Post.find(params[:id])
+    redirect_to @post
   end
 
   private
