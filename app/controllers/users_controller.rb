@@ -1,20 +1,33 @@
 class UsersController < ApplicationController
+  skip_before_action :authorize, only: :show
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.order(:name)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /users/new
   def new
     @user = User.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /users/1/edit
@@ -29,9 +42,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         format.html { redirect_to users_url, notice: "User #{@user.name} was successfully created." }
+        format.js
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
+        format.js
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

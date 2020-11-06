@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
   resources :users
-  root 'posts#index', as: 'home'
+  root 'posts#index', as: 'post_index'
   resources :posts do
     resources :comments
   end

@@ -1,2 +1,3 @@
-
-$("#content").html("<%= j render partial: "new", locals: {post: @post} %>");
+content = document.querySelector(".content")
+content.innerHTML= ''
+content.innerHTML = <%= j render 'new', post: @post %>

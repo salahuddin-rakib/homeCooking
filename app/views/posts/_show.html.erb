@@ -1,23 +1,35 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
-
-<p>
-  <strong>Image url:</strong>
-  <%= @post.image_url %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
-<hr>
-<%= render 'comments/comments' %>
-<hr>
-<%= render 'comments/form' %>
+<div>
+  <div>
+    <p id="notice"><%= notice %></p>
+    <div>
+      <p>
+        <strong>Title:</strong>
+        <%= @post.title %>
+      </p>
+    </div>
+    <div>
+      <p>
+        <strong>Description:</strong>
+        <%= @post.description %>
+      </p>
+    </div>
+    <div>
+      <p>
+        <strong>Image url:</strong>
+        <%= @post.image_url %>
+      </p>
+    </div>
+    <ul>
+      <li class="button-normal"><%= link_to 'Home', posts_path %></li>
+      <% if session[:user_id] %>
+        <li class="button-normal"><%= link_to 'Edit', edit_post_path(@post) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div>
+    <hr>
+    <%= render 'comments/comments' %>
+    <hr>
+    <%= render 'comments/form' %>
+  </div>
+</div>

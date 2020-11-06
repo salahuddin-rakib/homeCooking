@@ -1,11 +1,15 @@
 class PostsController < ApplicationController
-  skip_before_action :authorize, only: [:create, :update]
+  skip_before_action :authorize, only: [:show, :index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /posts/1
@@ -13,6 +17,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     respond_to do |format|
+      format.html
       format.js
     end
   end
@@ -20,9 +25,6 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    respond_to do |format|
-      format.js
-    end
   end
 
   # GET /posts/1/edit
@@ -37,10 +39,12 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.js
         format.json { render :show, status: :created, location: @post }
       else
         puts @post.errors.full_messages
         format.html { render :new }
+        format.js
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
